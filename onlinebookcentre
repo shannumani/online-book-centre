@@ -1,0 +1,91 @@
+
+class Book {
+    private String title;
+    private String author;
+    private double price;
+
+    public Book(String title, String author, double price) {
+        this.title = title;
+        this.author = author;
+        this.price = price;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    @Override
+    public String toString() {
+        return title + " by " + author + " - $" + price;
+    }
+}
+
+class Customer {
+    private String name;
+    private List<Book> cart;
+
+    public Customer(String name) {
+        this.name = name;
+        this.cart = new ArrayList<>();
+    }
+
+    public void addToCart(Book book) {
+        cart.add(book);
+    }
+
+    public void displayCart() {
+        System.out.println(name + "'s Cart:");
+        for (Book book : cart) {
+            System.out.println("- " + book);
+        }
+    }
+}
+
+class BookStore {
+    private List<Book> books;
+
+    public BookStore() {
+        this.books = new ArrayList<>();
+    }
+
+    public void addBook(Book book) {
+        books.add(book);
+    }
+
+    public void displayBooks() {
+        System.out.println("Available Books:");
+        for (Book book : books) {
+            System.out.println("- " + book);
+        }
+    }
+
+    public void processOrder(Customer customer) {
+        System.out.println("Processing order for " + customer.getName() + ":");
+        customer.displayCart();
+        System.out.println("Order processed successfully!");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        BookStore store = new BookStore();
+
+        // Adding books to the store
+        store.addBook(new Book("Java Programming", "John Smith", 29.99));
+        store.addBook(new Book("Python for Beginners", "Emily Johnson", 24.99));
+        store.addBook(new Book("Data Structures and Algorithms", "David Brown", 39.99));
+
+        // Display available books
+        store.displayBooks();
+
+        // Customer shopping
+        Customer customer1 = new Customer("Alice");
+        customer1.addToCart(store.getBooks().get(0)); // Adding the first book to the cart
